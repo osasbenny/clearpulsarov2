@@ -465,11 +465,11 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <img src="/logo-white.png" alt="Clyveris Bank" className="h-10 w-10" />
-                <span className="text-2xl font-bold">Clyveris Bank</span>
+             <img src="/logo.png" alt="ClearPulse" className="h-10 w-10" />
+                <span className="text-2xl font-bold">ClearPulse</span>
               </div>
               <p className="text-gray-300 text-sm max-w-md">
-                Clyveris Bank - Your trusted partner in personal banking. Offering secure checking and savings accounts, seamless fund transfers, and 24/7 support to help you manage your finances with ease.
+                Smart, simple, secure banking—at your fingertips
               </p>
             </div>
             <div>
@@ -489,9 +489,9 @@ export default function Home() {
                 <li><Link href="/terms"><a className="hover:text-white transition-colors">Terms and Conditions</a></Link></li>
               </ul>
               <h3 className="text-lg font-semibold mt-6 mb-4">Contact Information</h3>
-              <p className="text-gray-300">Phone: 1-800-555-1234</p>
-              <p className="text-gray-300">Email: support@clyverisbank.com</p>
-              <p className="text-gray-300">Address: 1234 Banking Blvd, Cityname, State, ZIP</p>
+              <p className="text-gray-300">Phone: +1 (313) 307-9393</p>
+              <p className="text-gray-300">Email: info@clearpulsaro.com</p>
+              <p className="text-gray-300">789 Enterprise Way, Floor 2, NY, New York, 10016</p>
             </div>
           </div>
           <div className="mt-12 border-t border-gray-700 pt-4 flex flex-col md:flex-row justify-between items-center text-sm">
@@ -515,7 +515,7 @@ export default function Home() {
                   </DropdownMenuRadioGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <p className="text-gray-400">&copy; {new Date().getFullYear()} Clyveris Bank. All Rights Reserved.</p>
+              <p className="text-gray-400">&copy; {new Date().getFullYear()} ClearPulse. All Rights Reserved.</p>
             </div>
           </div>
         </div>
