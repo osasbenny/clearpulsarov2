@@ -26,51 +26,107 @@ export default function Home() {
         </button>
       </div>
       {/* Navigation */}
-      <nav className="bg-white border-b sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-2">
-              <img src="/logo.png" alt="ClearPulse" className="h-10 w-10" />
-              <span className="text-2xl font-bold text-[#301CA0]">ClearPulse</span>
+      <nav className="sticky top-0 z-50">
+        {/* Top Utility Bar (Desktop Only) */}
+        <div className="hidden md:block bg-[#0056b3] text-white py-2">
+          <div className="container mx-auto px-4 flex justify-end items-center gap-4">
+            <a href="https://dashboard.clearpulsaro.com/" className="text-sm hover:underline">
+              LOGIN
             </a>
-          </Link>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/"><a className="text-gray-700 hover:text-[#7132CA] transition-colors">Home</a></Link>
-            <Link href="/services"><a className="text-gray-700 hover:text-[#7132CA] transition-colors">Services</a></Link>
-            <Link href="/about"><a className="text-gray-700 hover:text-[#7132CA] transition-colors">About</a></Link>
-            <Link href="/apply"><a className="text-gray-700 hover:text-[#7132CA] transition-colors">Apply Now</a></Link>
-          </div>
-          <div className="hidden md:flex items-center gap-8">
-            <a href="https://dashboard.clearpulsaro.com/" className="text-gray-700 hover:text-[#7132CA] transition-colors flex items-center gap-1">
-              <User className="h-5 w-5" /> Sign in
+            <a href="https://dashboard.clearpulsaro.com/" className="text-sm hover:underline">
+              OPEN ACCOUNT
             </a>
-            <Link href="/contact"><a className="text-gray-700 hover:text-[#7132CA] transition-colors">Contact us</a></Link>
-          </div>
-
-          {/* Mobile Navigation (Hamburger Menu) */}
-          <div className="md:hidden flex items-center gap-4">
-            <a href="https://dashboard.clearpulsaro.com/" className="text-gray-700 hover:text-[#7132CA] transition-colors flex items-center gap-1">
-              <User className="h-5 w-5" /> Sign in
-            </a>
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="border-none p-0">
-                  <Menu className="h-6 w-6 text-red-600" />
-                  <span className="sr-only">Toggle Menu</span>
+            {/* Language Selector */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="text-white hover:bg-white/10 p-1 h-auto text-sm gap-1">
+                  <img src={`/images/flag_${language.toLowerCase()}.png`} alt={`${language} flag`} className="h-4 w-4 rounded-full" />
+                  {language === "EN" ? "English" : language === "ES" ? "Español" : "Français"}
                 </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-64">
-                <div className="flex flex-col gap-4 pt-8 text-center">
-                  <Link href="/"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">Home</a></Link>
-                  <Link href="/services"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">Services</a></Link>
-                  <Link href="/about"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">About</a></Link>
-                  <Link href="/apply"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">Apply Now</a></Link>
-                  <Link href="/contact"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">Contact us</a></Link>
-                </div>
-              </SheetContent>
-            </Sheet>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-32">
+                <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+                  {languages.map((lang) => (
+                    <DropdownMenuRadioItem key={lang.code} value={lang.code}>
+                      <img src={`/images/flag_${lang.code.toLowerCase()}.png`} alt={`${lang.code} flag`} className="h-4 w-4 rounded-full mr-2" />
+                      {lang.name}
+                    </DropdownMenuRadioItem>
+                  ))}
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+
+        {/* Main Navigation Bar */}
+        <div className="bg-[#007bff] text-white border-b">
+          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+            <Link href="/">
+              <a className="flex items-center gap-2">
+                <img src="/logo.png" alt="ClearPulse" className="h-10 w-10" />
+                <span className="text-2xl font-bold">ClearPulse</span>
+              </a>
+            </Link>
+            
+            {/* Desktop Main Links */}
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/"><a className="text-white hover:text-gray-200 transition-colors font-semibold">HOME</a></Link>
+              <Link href="/bank"><a className="text-white hover:text-gray-200 transition-colors font-semibold">BANK</a></Link>
+              <Link href="/save"><a className="text-white hover:text-gray-200 transition-colors font-semibold">SAVE</a></Link>
+              <Link href="/borrow"><a className="text-white hover:text-gray-200 transition-colors font-semibold">BORROW</a></Link>
+              <Link href="/wealth"><a className="text-white hover:text-gray-200 transition-colors font-semibold">WEALTH & RETIRE</a></Link>
+              <Link href="/insure"><a className="text-white hover:text-gray-200 transition-colors font-semibold">INSURE</a></Link>
+              <Link href="/learn"><a className="text-white hover:text-gray-200 transition-colors font-semibold">LEARN & PLAN</a></Link>
+              <Link href="/payments"><a className="text-white hover:text-gray-200 transition-colors font-semibold">PAYMENTS</a></Link>
+            </div>
+
+            {/* Mobile Navigation (Hamburger Menu) */}
+            <div className="md:hidden flex items-center gap-4">
+              <a href="https://dashboard.clearpulsaro.com/" className="text-white hover:text-gray-200 transition-colors flex items-center gap-1">
+                <User className="h-5 w-5" /> Sign in
+              </a>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="icon" className="border-none p-0 bg-transparent hover:bg-transparent">
+                    <Menu className="h-6 w-6 text-white" />
+                    <span className="sr-only">Toggle Menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-64">
+                  <div className="flex flex-col gap-4 pt-8 text-center">
+                    <Link href="/"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">HOME</a></Link>
+                    <Link href="/bank"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">BANK</a></Link>
+                    <Link href="/save"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">SAVE</a></Link>
+                    <Link href="/borrow"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">BORROW</a></Link>
+                    <Link href="/wealth"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">WEALTH & RETIRE</a></Link>
+                    <Link href="/insure"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">INSURE</a></Link>
+                    <Link href="/learn"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">LEARN & PLAN</a></Link>
+                    <Link href="/payments"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">PAYMENTS</a></Link>
+                    <a href="https://dashboard.clearpulsaro.com/" className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg mt-4">LOGIN</a>
+                    <a href="https://dashboard.clearpulsaro.com/" className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">OPEN ACCOUNT</a>
+                    {/* Language Selector in Mobile Menu */}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="outline" className="rounded-full gap-2 w-full justify-start mt-4">
+                          <img src={`/images/flag_${language.toLowerCase()}.png`} alt={`${language} flag`} className="h-4 w-4 rounded-full" />
+                          {language === "EN" ? "English" : language === "ES" ? "Español" : "Français"}
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-full">
+                        <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+                          {languages.map((lang) => (
+                            <DropdownMenuRadioItem key={lang.code} value={lang.code}>
+                              <img src={`/images/flag_${lang.code.toLowerCase()}.png`} alt={`${lang.code} flag`} className="h-4 w-4 rounded-full mr-2" />
+                              {lang.name}
+                            </DropdownMenuRadioItem>
+                          ))}
+                        </DropdownMenuRadioGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
       </nav>
