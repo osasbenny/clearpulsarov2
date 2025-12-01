@@ -1,7 +1,9 @@
 import { Link } from "wouter";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, Smartphone, Globe, FileText, HeadphonesIcon, Zap, ArrowRight, CheckCircle2, Menu, XIcon } from "lucide-react";
+import { Shield, Smartphone, Globe, FileText, HeadphonesIcon, Zap, ArrowRight, CheckCircle2, Menu, User } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
@@ -37,7 +39,7 @@ export default function Home() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="rounded-full gap-2">
-                  <Globe className="h-4 w-4" />
+                  <img src={`/images/flag_${language.toLowerCase()}.png`} alt={`${language} flag`} className="h-4 w-4 rounded-full" />
                   {language}
                 </Button>
               </DropdownMenuTrigger>
@@ -63,13 +65,18 @@ export default function Home() {
           {/* Mobile Navigation (Hamburger Menu) */}
           <Sheet>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="outline" size="icon">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
+              <div className="flex items-center gap-4">
+                <a href="https://dashboard.clearpulsaro.com/" className="text-gray-700 hover:text-[#7132CA] transition-colors flex items-center gap-1">
+                  <User className="h-5 w-5" /> Sign in
+                </a>
+                <Button variant="outline" size="icon">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle Menu</span>
+                </Button>
+              </div>
             </SheetTrigger>
             <SheetContent side="right" className="w-64">
-              <div className="flex flex-col gap-4 pt-8">
+              <div className="flex flex-col gap-4 pt-8 text-center">
                 <Link href="/"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">Home</a></Link>
                 <Link href="/about"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">About</a></Link>
                 <Link href="/faq"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">FAQ</a></Link>
@@ -85,7 +92,7 @@ export default function Home() {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline" className="rounded-full gap-2 w-full justify-start">
-                      <Globe className="h-4 w-4" />
+                      <img src={`/images/flag_${language.toLowerCase()}.png`} alt={`${language} flag`} className="h-4 w-4 rounded-full" />
                       Language: {language}
                     </Button>
                   </DropdownMenuTrigger>
@@ -106,42 +113,126 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-[#301CA0] relative overflow-hidden">
+      <section className="bg-black relative overflow-hidden">
         {/* Decorative circles */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#7132CA] rounded-full opacity-10 transform translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#7132CA] rounded-full opacity-10 transform -translate-x-1/2 translate-y-1/2"></div>
-        <div className="absolute top-1/2 right-1/4 w-32 h-32 border-4 border-[#7132CA] rounded-full opacity-20"></div>
-        
-        <div className="container mx-auto px-4 py-20 relative z-10">
+                <div className="container mx-auto px-4 py-20 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="text-white">
-              <p className="text-[#7132CA] font-semibold mb-4 tracking-wider uppercase text-sm">ClearPulse Banking</p>
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                Bank With Confidence,<br />
-                Harvest The Rewards
-              </h1>
-              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-                Mutual fund from ClearPulse Asset Management that invests in Greek and international 
-                corporate bonds in dollars, euros and pounds.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <a href="https://dashboard.clearpulsaro.com/" target="_blank" rel="noopener noreferrer">
-                  <Button className="bg-[#7132CA] hover:bg-[#301CA0] text-white rounded-full px-8 py-6 text-lg">
-                    Open An Account Now <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </a>
-                <div className="flex items-center gap-3 text-white">
-                  <div className="w-12 h-12 rounded-full bg-[#7132CA]/20 flex items-center justify-center">
-                    <HeadphonesIcon className="h-6 w-6 text-[#7132CA]" />
+              {/* Mobile Carousel for Hero Section */}
+              <div className="md:hidden">
+                <Carousel
+                  opts={{ align: "start", loop: true }}
+                  plugins={[Autoplay({ delay: 5000 })]}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {/* Slide 1 */}
+                    <CarouselItem>
+                      <div className="p-1">
+                        <h1 className="text-5xl font-bold mb-4 leading-tight">
+                          Banking Made Easy
+                        </h1>
+                        <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                          Simple and secure ways to manage your money.
+                        </p>
+                        <a href="https://dashboard.clearpulsaro.com/" target="_blank" rel="noopener noreferrer">
+                          <Button className="bg-red-600 hover:bg-red-700 text-white rounded-full px-8 py-3 text-lg">
+                            Sign In
+                          </Button>
+                        </a>
+                      </div>
+                    </CarouselItem>
+                    {/* Slide 2 */}
+                    <CarouselItem>
+                      <div className="p-1">
+                        <h1 className="text-5xl font-bold mb-4 leading-tight">
+                          Harvest The Rewards
+                        </h1>
+                        <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                          Invest in Greek and international corporate bonds.
+                        </p>
+                        <a href="https://dashboard.clearpulsaro.com/" target="_blank" rel="noopener noreferrer">
+                          <Button className="bg-red-600 hover:bg-red-700 text-white rounded-full px-8 py-3 text-lg">
+                            Learn More
+                          </Button>
+                        </a>
+                      </div>
+                    </CarouselItem>
+                    {/* Slide 3 */}
+                    <CarouselItem>
+                      <div className="p-1">
+                        <h1 className="text-5xl font-bold mb-4 leading-tight">
+                          24/7 Support
+                        </h1>
+                        <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                          Our dedicated team is always here to help you.
+                        </p>
+                        <Link href="/contact">
+                          <Button className="bg-red-600 hover:bg-red-700 text-white rounded-full px-8 py-3 text-lg">
+                            Contact Us
+                          </Button>
+                        </Link>
+                      </div>
+                    </CarouselItem>
+                    {/* Slide 4 */}
+                    <CarouselItem>
+                      <div className="p-1">
+                        <h1 className="text-5xl font-bold mb-4 leading-tight">
+                          Secure and Private
+                        </h1>
+                        <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                          Your financial data is protected with top-tier security.
+                        </p>
+                        <Link href="/about">
+                          <Button className="bg-red-600 hover:bg-red-700 text-white rounded-full px-8 py-3 text-lg">
+                            Our Security
+                          </Button>
+                        </Link>
+                      </div>
+                    </CarouselItem>
+                  </CarouselContent>
+                  <div className="flex justify-center mt-8">
+                    {/* Simple indicator for the slides */}
+                    <div className="flex space-x-2">
+                      <div className="h-2 w-8 bg-white/50 rounded-full data-[active=true]:bg-red-600" data-active="true"></div>
+                      <div className="h-2 w-8 bg-white/50 rounded-full"></div>
+                      <div className="h-2 w-8 bg-white/50 rounded-full"></div>
+                      <div className="h-2 w-8 bg-white/50 rounded-full"></div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-400">Need help?</p>
-                    <p className="font-semibold text-lg">+1 (313) 307-9393</p>
+                </Carousel>
+              </div>
+
+              {/* Desktop Content */}
+              <div className="hidden md:block">
+                <p className="text-[#7132CA] font-semibold mb-4 tracking-wider uppercase text-sm">ClearPulse Banking</p>
+                <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                  Bank With Confidence,<br />
+                  Harvest The Rewards
+                </h1>
+                <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                  Mutual fund from ClearPulse Asset Management that invests in Greek and international 
+                  corporate bonds in dollars, euros and pounds.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 items-start relative">
+                  <a href="https://dashboard.clearpulsaro.com/" target="_blank" rel="noopener noreferrer">
+                    <Button className="bg-[#7132CA] hover:bg-[#301CA0] text-white rounded-full px-8 py-6 text-lg">
+                      Open An Account Now <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </a>
+                  <div className="flex items-center gap-3 text-white">
+                    <div className="w-12 h-12 rounded-full bg-[#7132CA]/20 flex items-center justify-center">
+                      <HeadphonesIcon className="h-6 w-6 text-[#7132CA]" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Need help?</p>
+                      <p className="font-semibold text-lg">+1 (313) 307-9393</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative hidden md:block">
               <div className="absolute -top-8 -right-8 w-64 h-64 bg-[#7132CA] rounded-3xl transform rotate-12"></div>
               <img 
                 src="/images/team-meeting.jpg" 
@@ -150,6 +241,27 @@ export default function Home() {
               />
             </div>
           </div>
+        </div>
+        {/* Mobile Language Selector at the bottom of the hero section - moved outside the grid for full width */}
+        <div className="md:hidden absolute bottom-4 left-0 right-0 flex justify-center z-20">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="rounded-md gap-2 bg-white text-black shadow-lg">
+                <img src={`/images/flag_${language.toLowerCase()}.png`} alt={`${language} flag`} className="h-4 w-4 rounded-full" />
+                {language}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-32">
+              <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+                {languages.map((lang) => (
+                  <DropdownMenuRadioItem key={lang.code} value={lang.code}>
+                    <img src={`/images/flag_${lang.code.toLowerCase()}.png`} alt={`${lang.code} flag`} className="h-4 w-4 rounded-full mr-2" />
+                    {lang.name}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </section>
 
