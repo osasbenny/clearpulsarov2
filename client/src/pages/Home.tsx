@@ -47,6 +47,7 @@ export default function Home() {
                 <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
                   {languages.map((lang) => (
                     <DropdownMenuRadioItem key={lang.code} value={lang.code}>
+                      <img src={`/images/flag_${lang.code.toLowerCase()}.png`} alt={`${lang.code} flag`} className="h-4 w-4 rounded-full mr-2" />
                       {lang.name}
                     </DropdownMenuRadioItem>
                   ))}
@@ -123,7 +124,7 @@ export default function Home() {
                 <Carousel
                   opts={{ align: "start", loop: true }}
                   plugins={[Autoplay({ delay: 5000 })]}
-                  className="w-full"
+                  className="w-full relative"
                 >
                   <CarouselContent>
                     {/* Slide 1 */}
@@ -191,6 +192,8 @@ export default function Home() {
                       </div>
                     </CarouselItem>
                   </CarouselContent>
+                  <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white border-none" />
+                  <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white border-none" />
                   <div className="flex justify-center mt-8">
                     {/* Simple indicator for the slides */}
                     <div className="flex space-x-2">
