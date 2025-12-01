@@ -1,9 +1,19 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, Smartphone, Globe, FileText, HeadphonesIcon, Zap, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Shield, Smartphone, Globe, FileText, HeadphonesIcon, Zap, ArrowRight, CheckCircle2, Menu, XIcon } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu";
+import { useState } from "react";
 
 export default function Home() {
+  const [language, setLanguage] = useState("EN");
+  const languages = [
+    { code: "EN", name: "English" },
+    { code: "ES", name: "Español" },
+    { code: "FR", name: "Français" },
+  ];
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -15,11 +25,33 @@ export default function Home() {
               <span className="text-2xl font-bold text-[#301CA0]">ClearPulse</span>
             </a>
           </Link>
-                    <div className="hidden md:flex items-center gap-8">
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
             <Link href="/"><a className="text-gray-700 hover:text-[#7132CA] transition-colors">Home</a></Link>
             <Link href="/about"><a className="text-gray-700 hover:text-[#7132CA] transition-colors">About</a></Link>
             <Link href="/faq"><a className="text-gray-700 hover:text-[#7132CA] transition-colors">FAQ</a></Link>
             <Link href="/contact"><a className="text-gray-700 hover:text-[#7132CA] transition-colors">Contact</a></Link>
+            
+            {/* Language Selector */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="rounded-full gap-2">
+                  <Globe className="h-4 w-4" />
+                  {language}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-32">
+                <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+                  {languages.map((lang) => (
+                    <DropdownMenuRadioItem key={lang.code} value={lang.code}>
+                      {lang.name}
+                    </DropdownMenuRadioItem>
+                  ))}
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <a href="https://dashboard.clearpulsaro.com/" className="text-gray-700 hover:text-[#7132CA] transition-colors">Sign in</a>
             <a href="https://dashboard.clearpulsaro.com/">
               <Button className="bg-[#7132CA] hover:bg-[#301CA0] text-white rounded-full px-6">
@@ -27,6 +59,49 @@ export default function Home() {
               </Button>
             </a>
           </div>
+
+          {/* Mobile Navigation (Hamburger Menu) */}
+          <Sheet>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="outline" size="icon">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-64">
+              <div className="flex flex-col gap-4 pt-8">
+                <Link href="/"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">Home</a></Link>
+                <Link href="/about"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">About</a></Link>
+                <Link href="/faq"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">FAQ</a></Link>
+                <Link href="/contact"><a className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">Contact</a></Link>
+                <a href="https://dashboard.clearpulsaro.com/" className="text-gray-700 hover:text-[#7132CA] transition-colors text-lg">Sign in</a>
+                <a href="https://dashboard.clearpulsaro.com/">
+                  <Button className="bg-[#7132CA] hover:bg-[#301CA0] text-white rounded-full px-6 w-full">
+                    E-Banking
+                  </Button>
+                </a>
+                
+                {/* Language Selector in Mobile */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="rounded-full gap-2 w-full justify-start">
+                      <Globe className="h-4 w-4" />
+                      Language: {language}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-full">
+                    <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+                      {languages.map((lang) => (
+                        <DropdownMenuRadioItem key={lang.code} value={lang.code}>
+                          {lang.name}
+                        </DropdownMenuRadioItem>
+                      ))}
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
 
@@ -155,7 +230,7 @@ export default function Home() {
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
+            <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-[#7132CA] rounded-xl flex items-center justify-center mb-6">
                   <Smartphone className="h-8 w-8 text-white" />
@@ -175,7 +250,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
+            <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-[#7132CA] rounded-xl flex items-center justify-center mb-6">
                   <Globe className="h-8 w-8 text-white" />
@@ -195,7 +270,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
+            <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-[#7132CA] rounded-xl flex items-center justify-center mb-6">
                   <FileText className="h-8 w-8 text-white" />
